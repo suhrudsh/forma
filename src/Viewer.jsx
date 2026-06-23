@@ -6,7 +6,7 @@ import { Model } from "./Model";
 export default function Viewer() {
   const ref = useRef();
   return (
-    <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
+    <Canvas shadows dpr={[1, 2]} camera={{ fov: 20 }}>
       <Suspense fallback={null}>
         <Stage
           controls={ref}
@@ -19,7 +19,7 @@ export default function Viewer() {
           false
         </Stage>
       </Suspense>
-      <OrbitControls ref={ref} autoRotate />
+      <OrbitControls ref={ref} />
     </Canvas>
   );
 }
