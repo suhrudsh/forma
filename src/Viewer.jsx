@@ -5,18 +5,18 @@ import { Model } from "./Model";
 
 export default function Viewer() {
   const ref = useRef();
+
   return (
-    <Canvas shadows dpr={[1, 2]} camera={{ fov: 20 }}>
+    <Canvas
+      dpr={[1, 2]}
+      camera={{
+        fov: 20,
+        position: [7.662476643468656, 2.2230482249511394, 6.491054258467735],
+      }}
+    >
       <Suspense fallback={null}>
-        <Stage
-          controls={ref}
-          preset="rembrandt"
-          intensity={1}
-          environment="city"
-        >
-          false
+        <Stage adjustCamera={false} shadows={false} environment={null}>
           <Model />
-          false
         </Stage>
       </Suspense>
       <OrbitControls ref={ref} />
