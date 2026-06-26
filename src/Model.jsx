@@ -1,29 +1,54 @@
-import React, { useRef } from "react";
-import { useGLTF, PerspectiveCamera } from "@react-three/drei";
+import React, { useEffect, useRef } from "react";
+import { useGLTF, PerspectiveCamera, useHelper } from "@react-three/drei";
+import { RectAreaLightHelper } from "three/examples/jsm/Addons.js";
+import { PointLightHelper } from "three";
+
+function Lights() {
+  const keyRef = useRef();
+  const fillRef = useRef();
+  const pointRef = useRef();
+
+  useHelper(keyRef, RectAreaLightHelper);
+  useHelper(fillRef, RectAreaLightHelper);
+  useHelper(pointRef, PointLightHelper, 0.5);
+
+  useEffect(() => {
+    keyRef.current?.lookAt(0, 0, 0);
+    fillRef.current?.lookAt(0, 0, 0);
+  }, []);
+
+  return (
+    <>
+      <rectAreaLight
+        ref={keyRef}
+        position={[7.751, 8.816, -0.603]}
+        width={1}
+        height={1}
+        intensity={200}
+      />
+      <rectAreaLight
+        ref={fillRef}
+        position={[-2.403, 0.184, 7.98]}
+        width={1}
+        height={1}
+        intensity={100}
+      />
+      <pointLight
+        ref={pointRef}
+        position={[-2.919, 2.866, -1.35]}
+        intensity={200}
+      />
+    </>
+  );
+}
 
 export function Model(props) {
-  const { nodes, materials } = useGLTF("/threejs-tetris-cube.glb");
+  const { nodes, materials } = useGLTF("/forma-design.glb");
+
   return (
     <group {...props} dispose={null}>
-      {/* <pointLight
-        intensity={10870.283}
-        decay={2}
-        position={[-2.919, 2.866, -1.35]}
-        rotation={[-Math.PI / 2, 0, 0]}
-      /> */}
-      <PerspectiveCamera
-        makeDefault={false}
-        far={100}
-        near={0.1}
-        fov={22.895}
-        position={[6.902, 5.939, 7.15]}
-        rotation={[-0.398, 0.726, 0.272]}
-      />
-      <group
-        position={[0, 2.953, 0]}
-        rotation={[0, 0.175, -Math.PI / 2]}
-        scale={2.999}
-      >
+      <Lights />
+      <group rotation={[0, 0, -Math.PI / 2]} scale={2.999}>
         <mesh
           castShadow
           receiveShadow
@@ -85,4 +110,4 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload("/threejs-tetris-cube.glb");
+useGLTF.preload("/forma-design.glb");
