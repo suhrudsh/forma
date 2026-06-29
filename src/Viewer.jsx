@@ -1,12 +1,9 @@
-import React, { Suspense, useRef } from "react";
+import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stage, useHelper } from "@react-three/drei";
+import { Stage } from "@react-three/drei";
 import { Model } from "./Model";
-import { AxesHelper } from "three";
 
 export default function Viewer() {
-  const ref = useRef();
-
   return (
     <Canvas
       dpr={[1, 2]}
@@ -30,7 +27,6 @@ export default function Viewer() {
         </Stage>
       </Suspense>
       {import.meta.env.DEV && <axesHelper args={[2.5]} />}
-      <OrbitControls ref={ref} />
     </Canvas>
   );
 }
