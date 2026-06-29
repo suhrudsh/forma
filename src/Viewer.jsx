@@ -1,6 +1,6 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Stage } from "@react-three/drei";
+import { Environment, Stage } from "@react-three/drei";
 import { Model } from "./Model";
 
 import { useFrame, useThree } from "@react-three/fiber";
@@ -31,18 +31,12 @@ export default function Viewer() {
       }}
     >
       <Suspense fallback={null}>
-        <Stage
-          adjustCamera={false}
-          shadows={false}
-          environment={{
-            preset: "studio",
-            environmentIntensity: 0.25,
-            environmentRotation: [0, 4.63, 0],
-          }}
-          intensity={0}
-        >
-          <Model />
-        </Stage>
+        <Environment
+          preset="studio"
+          environmentIntensity={0.25}
+          environmentRotation={[0, 4.63, 0]}
+        />
+        <Model />
       </Suspense>
       <CameraRig />
       {import.meta.env.DEV && <axesHelper args={[2.5]} />}
