@@ -1,7 +1,25 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Stage } from "@react-three/drei";
 import { Model } from "./Model";
+
+import { useFrame, useThree } from "@react-three/fiber";
+
+function CameraRig({ orbitDistance = 0.75, lerpFactor = 0.035 }) {
+  const { camera, pointer } = useThree();
+  const initialPos = useRef(camera.position.clone());
+
+  useFrame(() => {
+    const targetX = initialPos.current.x + pointer.x * orbitDistance;
+    const targetY = initialPos.current.y + pointer.y * orbitDistance;
+
+    camera.position.x += (targetX - camera.position.x) * lerpFactor;
+    camera.position.y += (targetY - camera.position.y) * lerpFactor;
+    camera.lookAt(0, 0, 0);
+  });
+
+  return null;
+}
 
 export default function Viewer() {
   return (
@@ -26,6 +44,7 @@ export default function Viewer() {
           <Model />
         </Stage>
       </Suspense>
+      <CameraRig />
       {import.meta.env.DEV && <axesHelper args={[2.5]} />}
     </Canvas>
   );
