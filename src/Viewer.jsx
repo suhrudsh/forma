@@ -1,6 +1,6 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Stage } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { Model } from "./Model";
 
 import { useFrame, useThree } from "@react-three/fiber";

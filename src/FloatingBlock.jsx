@@ -1,5 +1,5 @@
 // FloatingBlock.jsx
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
