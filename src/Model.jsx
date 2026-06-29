@@ -6,8 +6,8 @@ function Lights() {
   const pointRef = useRef();
   const pointRef2 = useRef();
 
-  useHelper(pointRef, PointLightHelper, 0.5);
-  useHelper(pointRef2, PointLightHelper, 0.5);
+  useHelper(pointRef, import.meta.env.DEV ? PointLightHelper : null, 0.5);
+  useHelper(pointRef2, import.meta.env.DEV ? PointLightHelper : null, 0.5);
 
   return (
     <>

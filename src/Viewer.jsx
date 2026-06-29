@@ -1,7 +1,8 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stage } from "@react-three/drei";
+import { OrbitControls, Stage, useHelper } from "@react-three/drei";
 import { Model } from "./Model";
+import { AxesHelper } from "three";
 
 export default function Viewer() {
   const ref = useRef();
@@ -28,6 +29,7 @@ export default function Viewer() {
           <Model />
         </Stage>
       </Suspense>
+      {import.meta.env.DEV && <axesHelper args={[2.5]} />}
       <OrbitControls ref={ref} />
     </Canvas>
   );
