@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useGLTF, useHelper } from "@react-three/drei";
 import { PointLightHelper } from "three";
+import { useFrame } from "@react-three/fiber";
 
 function Lights() {
   const pointRef = useRef();
@@ -28,6 +29,20 @@ function Lights() {
   );
 }
 
+function FloatingBlock({ children, speed = 1.5, amplitude = 0.01 }) {
+  const ref = useRef();
+  const randomOffset = Math.random() * 10;
+
+  useFrame(({ clock }) => {
+    ref.current.position.x =
+      Math.sin(clock.elapsedTime * speed + randomOffset) * amplitude;
+    ref.current.position.y =
+      Math.cos(clock.elapsedTime * speed + randomOffset) * amplitude;
+  });
+
+  return <group ref={ref}>{children}</group>;
+}
+
 export function Model(props) {
   const { nodes, materials } = useGLTF("/forma-design.glb");
 
@@ -35,62 +50,62 @@ export function Model(props) {
     <group {...props} dispose={null}>
       <Lights />
       <group rotation={[0, 0, -Math.PI / 2]} scale={2.999}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Block_1001.geometry}
-          material={materials["Dark Stone"]}
-          position={[-0.194, 0.067, -0.067]}
-          scale={5.868}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Block_2001.geometry}
-          material={materials["Ceramic Unglazed_Baked"]}
-          position={[-0.051, 0.205, 0.315]}
-          scale={5.868}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Block_3001.geometry}
-          material={materials["Clay.001"]}
-          position={[-0.011, 0.29, -0.215]}
-          scale={5.868}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Block_4001.geometry}
-          material={materials["Brown Polished Oak Wood"]}
-          position={[0.32, 0.111, -0.058]}
-          scale={5.868}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Block_5001.geometry}
-          material={materials["PBR fresh gold"]}
-          position={[0.286, -0.238, 0.028]}
-          scale={5.868}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Block_6001.geometry}
-          material={materials["Recycled Brown Cardboard"]}
-          position={[-0.222, -0.259, -0.211]}
-          scale={5.868}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Block_7001.geometry}
-          material={materials["Blue Plastic Glossy_Baked"]}
-          position={[-0.289, -0.182, 0.208]}
-          scale={5.868}
-        />
+        <FloatingBlock>
+          <mesh
+            geometry={nodes.Block_1001.geometry}
+            material={materials["Dark Stone"]}
+            position={[-0.194, 0.067, -0.067]}
+            scale={5.868}
+          />
+        </FloatingBlock>
+        <FloatingBlock>
+          <mesh
+            geometry={nodes.Block_2001.geometry}
+            material={materials["Ceramic Unglazed_Baked"]}
+            position={[-0.051, 0.205, 0.315]}
+            scale={5.868}
+          />
+        </FloatingBlock>
+        <FloatingBlock>
+          <mesh
+            geometry={nodes.Block_3001.geometry}
+            material={materials["Clay.001"]}
+            position={[-0.011, 0.29, -0.215]}
+            scale={5.868}
+          />
+        </FloatingBlock>
+        <FloatingBlock>
+          <mesh
+            geometry={nodes.Block_4001.geometry}
+            material={materials["Brown Polished Oak Wood"]}
+            position={[0.32, 0.111, -0.058]}
+            scale={5.868}
+          />
+        </FloatingBlock>
+        <FloatingBlock>
+          <mesh
+            geometry={nodes.Block_5001.geometry}
+            material={materials["PBR fresh gold"]}
+            position={[0.286, -0.238, 0.028]}
+            scale={5.868}
+          />
+        </FloatingBlock>
+        <FloatingBlock>
+          <mesh
+            geometry={nodes.Block_6001.geometry}
+            material={materials["Recycled Brown Cardboard"]}
+            position={[-0.222, -0.259, -0.211]}
+            scale={5.868}
+          />
+        </FloatingBlock>
+        <FloatingBlock>
+          <mesh
+            geometry={nodes.Block_7001.geometry}
+            material={materials["Blue Plastic Glossy_Baked"]}
+            position={[-0.289, -0.182, 0.208]}
+            scale={5.868}
+          />
+        </FloatingBlock>
       </group>
     </group>
   );
