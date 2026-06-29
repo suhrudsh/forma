@@ -1,42 +1,28 @@
-import React, { useEffect, useRef } from "react";
-import { useGLTF, PerspectiveCamera, useHelper } from "@react-three/drei";
-import { RectAreaLightHelper } from "three/examples/jsm/Addons.js";
+import React, { useRef } from "react";
+import { useGLTF, useHelper } from "@react-three/drei";
 import { PointLightHelper } from "three";
 
 function Lights() {
-  const keyRef = useRef();
-  const fillRef = useRef();
   const pointRef = useRef();
+  const pointRef2 = useRef();
 
-  useHelper(keyRef, RectAreaLightHelper);
-  useHelper(fillRef, RectAreaLightHelper);
   useHelper(pointRef, PointLightHelper, 0.5);
-
-  useEffect(() => {
-    keyRef.current?.lookAt(0, 0, 0);
-    fillRef.current?.lookAt(0, 0, 0);
-  }, []);
+  useHelper(pointRef2, PointLightHelper, 0.5);
 
   return (
     <>
-      <rectAreaLight
-        ref={keyRef}
-        position={[7.751, 8.816, -0.603]}
-        width={1}
-        height={1}
-        intensity={200}
-      />
-      <rectAreaLight
-        ref={fillRef}
-        position={[-2.403, 0.184, 7.98]}
-        width={1}
-        height={1}
-        intensity={100}
-      />
       <pointLight
         ref={pointRef}
-        position={[-2.919, 2.866, -1.35]}
-        intensity={200}
+        position={[-2.6624, 0.1904, -1.5]}
+        intensity={100}
+        distance={3.75}
+      />
+      <pointLight
+        ref={pointRef2}
+        position={[-2.5, -1.5, 1.5]}
+        intensity={100}
+        decay={3}
+        distance={3.75}
       />
     </>
   );

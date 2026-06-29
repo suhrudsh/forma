@@ -10,12 +10,21 @@ export default function Viewer() {
     <Canvas
       dpr={[1, 2]}
       camera={{
-        fov: 20,
-        position: [7.662476643468656, 2.2230482249511394, 6.491054258467735],
+        fov: 22.895,
+        position: [4.981, 2.947, 6.95],
       }}
     >
       <Suspense fallback={null}>
-        <Stage adjustCamera={false} shadows={false} environment={null}>
+        <Stage
+          adjustCamera={false}
+          shadows={false}
+          environment={{
+            preset: "studio",
+            environmentIntensity: 0.25,
+            environmentRotation: [0, 4.63, 0],
+          }}
+          intensity={0}
+        >
           <Model />
         </Stage>
       </Suspense>
