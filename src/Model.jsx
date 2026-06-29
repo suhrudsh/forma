@@ -41,8 +41,9 @@ function Lights() {
 }
 
 export function Model(props) {
-  const { nodes, materials } = useGLTF("/forma-design.glb");
-
+  const { nodes, materials } = useGLTF(
+    `${import.meta.env.BASE_URL}forma-design.glb`,
+  );
   const blocks = [
     {
       key: "Block_1",
@@ -108,4 +109,4 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload("/forma-design.glb");
+useGLTF.preload(`${import.meta.env.BASE_URL}forma-design.glb`);
