@@ -2,7 +2,7 @@ import Viewer from "./Viewer";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex h-lvh w-full flex-col justify-end overflow-hidden bg-cover px-6 py-12 sm:px-10 sm:py-8 lg:px-16">
+    <section className="relative flex h-dvh w-full flex-col justify-end overflow-hidden bg-cover px-6 py-8 sm:px-10 sm:py-8 lg:px-16">
       {/* Big type — behind everything */}
       <div className="font-inter absolute inset-0 flex flex-col items-center justify-center text-center text-[clamp(2.5rem,12vw,11rem)] leading-[0.95] font-black tracking-[0.02em] text-white/50 uppercase select-none sm:tracking-[0.04em]">
         <p>Material.</p>
