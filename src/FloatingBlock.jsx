@@ -59,8 +59,8 @@ export function FloatingBlock({
     const elapsed = clock.elapsedTime - readyTime.current;
     const t = elapsed * speed;
 
-    velocity.current.x *= 0.7;
-    velocity.current.y *= 0.7;
+    velocity.current.x *= 0.9;
+    velocity.current.y *= 0.9;
 
     offset.current.x += velocity.current.x;
     offset.current.y += velocity.current.y;
