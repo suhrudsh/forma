@@ -70,6 +70,13 @@ const POSITIONS = {
   desktop: DESKTOP_POSITION,
 };
 
+const ORBIT_DISTANCES = {
+  mobile: 5,
+  "tablet-portrait": 1.1,
+  "tablet-landscape": 0.85,
+  desktop: 0.75,
+};
+
 export default function Viewer() {
   const tier = useDeviceTier();
 
@@ -87,10 +94,11 @@ export default function Viewer() {
           environmentIntensity={0.25}
           environmentRotation={[0, 4.63, 0]}
         />
-        <Model />
+        <Model tier={tier} />
       </Suspense>
       <CameraRig
         position={POSITIONS[tier]}
+        orbitDistance={ORBIT_DISTANCES[tier]}
         lookAtY={tier === "mobile" ? -0.6 : 0}
       />
       {import.meta.env.DEV && <axesHelper args={[2.5]} />}

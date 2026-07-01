@@ -40,7 +40,14 @@ function Lights() {
   );
 }
 
-export function Model(props) {
+const SENSITIVITY = {
+  mobile: 5,
+  "tablet-portrait": 1.8,
+  "tablet-landscape": 1.3,
+  desktop: 1,
+};
+
+export function Model({ tier = "desktop", ...props }) {
   const { nodes, materials } = useGLTF(
     `${import.meta.env.BASE_URL}forma-blocks.glb`,
   );
@@ -101,6 +108,7 @@ export function Model(props) {
             position={block.position}
             scale={5.868}
             delay={i * stagger}
+            sensitivity={SENSITIVITY[tier]}
             startPos={getStartPos(block.position)}
           />
         ))}

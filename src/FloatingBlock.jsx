@@ -14,6 +14,7 @@ export function FloatingBlock({
   position,
   scale,
   delay = 0,
+  sensitivity = 1,
   startPos,
 }) {
   const groupRef = useRef();
@@ -42,8 +43,8 @@ export function FloatingBlock({
 
   function handlePointerMove(e) {
     if (!ready.current) return;
-    velocity.current.x += e.movementY * 0.00003;
-    velocity.current.y += e.movementX * 0.00003;
+    velocity.current.x += e.movementY * 0.00003 * sensitivity;
+    velocity.current.y += e.movementX * 0.00003 * sensitivity;
   }
 
   useFrame(({ clock }) => {
