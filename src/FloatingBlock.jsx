@@ -25,7 +25,6 @@ export function FloatingBlock({
   useGSAP(() => {
     if (!groupRef.current) return;
 
-    groupRef.current.position.set(0, 0, 0);
     groupRef.current.position.set(startPos.x, startPos.y, startPos.z);
 
     gsap.to(groupRef.current.position, {
@@ -36,9 +35,7 @@ export function FloatingBlock({
       delay,
       ease: "back.out(0.4)",
       onComplete: () => {
-        requestAnimationFrame(() => {
-          ready.current = true;
-        });
+        ready.current = true;
       },
     });
   }, []);
@@ -84,6 +81,7 @@ export function FloatingBlock({
         material={material}
         position={position}
         scale={scale}
+        frustumCulled={false}
       />
     </group>
   );
